@@ -2,6 +2,18 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.2.
 
+## Installing dependencies
+
+First of all, run `npm i` in the root of the project to install all packages and dependencies.
+
+## REST API server
+
+Running [json server - Get a full fake REST API ](https://github.com/typicode/json-server)
+
+Run `npm install -g json-server` to global install the server.
+
+Run `json-server --watch banco-de-dados.json` for a testing local REST API. Navigate to `http://localhost:3000/` to check if it's ok.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
