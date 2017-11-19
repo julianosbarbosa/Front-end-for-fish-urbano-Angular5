@@ -12,6 +12,8 @@ export class ComoUsarComponent implements OnInit {
 
   public comoUsar: string = '';
 
+  public dataValidade: any = Date.now();
+
   constructor(private route: ActivatedRoute, private ofertasServices: OfertasService) { }
 
   ngOnInit() {
