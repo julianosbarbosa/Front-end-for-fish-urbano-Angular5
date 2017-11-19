@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { OfertasService } from '../ofertas.service';
-import { Observable } from 'rxjs/Observable';
 import { Oferta } from '../shared/oferta.model';
+
+import '../util/rxjs-extensions';
+
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-topo',
@@ -13,16 +17,29 @@ export class TopoComponent implements OnInit {
 
   public ofertas: Observable<Oferta[]>;
 
+  public ofertas2: Oferta[];
+
+  private subjectPesquisa: Subject<string> = new Subject<string>();
+
   constructor(private ofertasServices: OfertasService) { }
 
   ngOnInit() {
+    this.ofertas = this.subjectPesquisa
+      .debounceTime(1000)
+      .distinctUntilChanged()
+      .switchMap((termo: string) => {
+        if (termo.trim() === '') {
+          return Observable.of<Oferta[]>([]);
+        }
+        return this.ofertasServices.pesquisaOfertas(termo);
+      });
+
+    this.ofertas.subscribe((ofertas: Oferta[]) => {
+      this.ofertas2 = ofertas
+    });
   }
 
   public pesquisa(termoDaBusca: string): void {
-    this.ofertas = this.ofertasServices.pesquisaOfertas(termoDaBusca);
-
-    this.ofertas.subscribe(
-      (ofertas: Oferta[]) => console.log(ofertas)
-    );
+    this.subjectPesquisa.next(termoDaBusca);
   }
 }
