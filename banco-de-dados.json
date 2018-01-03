@@ -206,6 +206,18 @@
       "complemento": "bloco 3 apertamento 3",
       "formaPagamento": "dinheiro",
       "id": 3
+    },
+    {
+      "endereco": "Rua 4",
+      "numero": "444",
+      "formaPagamento": "debito",
+      "id": 4
+    },
+    {
+      "endereco": "Rua 5",
+      "numero": "555",
+      "formaPagamento": "dinheiro",
+      "id": 5
     }
   ]
 }
